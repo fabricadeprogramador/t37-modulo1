@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/estilo.css" />
+    <script src="js/script.js"></script>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="titulo">
+        <h1>Controle de Contas</h1>
+      </div>
+
+      <div class="entrada">
+        <label for="entradaReceita" class="rotulo-na-linha">Receita</label>
+        <input
+          type="number"
+          id="entradaReceita"
+          placeholder="Valor da receita"
+        />
+        <button id="botaoReceita" onclick="adicionarReceita()">
+          Adicionar
+        </button>
+      </div>
+
+      <div class="entrada">
+        <label for="entradaDespesa" class="rotulo-na-linha">Despesa</label>
+        <input
+          type="number"
+          id="entradaDespesa"
+          placeholder="Valor da despesa"
+        />
+        <button id="botaoDespesa" onclick="adicionarDespesa()">
+          Adicionar
+        </button>
+      </div>
+
+      <div class="saida">
+        <div>
+          <div class="rotulo-resultado">
+            <label for="resultadoReceita">Total de receitas:</label>
+          </div>
+
+          <div class="resultado">
+            <span id="resultadoReceita"></span>
+          </div>
+        </div>
+
+        <div>
+          <div class="rotulo-resultado">
+            <label for="resultadoDespesa">Total de despesas:</label>
+          </div>
+          <div class="resultado">
+            <span id="resultadoDespesa"></span>
+          </div>
+        </div>
+
+        <div>
+          <div class="rotulo-resultado">
+            <label for="balanco">Balanço:</label>
+          </div>
+          <div class="resultado">
+            <span id="balanco"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
