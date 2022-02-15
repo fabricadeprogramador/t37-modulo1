@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Situação do aluno</title>
+    <meta charset="UTF-8" />
+
+    <style>
+      span {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Situação do Aluno</h1>
+
+    <input type="number" placeholder="Digite a nota..." id="inputNota" />
+    <button onclick="adicionarNota()">Adicionar</button>
+
+    <div>
+      <span id="notas"></span>
+      <span id="maior"></span>
+      <span id="menor"></span>
+      <span id="media"></span>
+      <span id="situacao"></span>
+    </div>
+  </body>
+
+  <script>
+    let notas = []
+    let maior = 0
+    let menor = 0
+    let somaNotas = 0
+    let media = 0
+
+    function adicionarNota() {
+      let novaNota = document.getElementById("inputNota").value
+
+      if (novaNota == "") {
+        alert("Preencha a nota!")
+      } else {
+        let notaConvertida = parseFloat(novaNota)
+
+        if (notaConvertida > 10 || notaConvertida < 0) {
+          //Entra quando o valor digitado pelo usuário é maior que dez ou menor que zero
+          alert("Nota deve estar entre 0 e 10 !")
+        } else {
+          //Entra quando o valor digitado pelo usuário está entre zero e dez
+          if (notas.length == 0) {
+            //Entra quando é a primeira nota a ser inserida
+            notas.push(notaConvertida)
+
+            maior = notas[0]
+            menor = notas[0]
+            somaNotas = notas[0]
+            media = notas[0]
+          } else {
+            //Nâo é mais a primeira inserção de nota
+            notas.push(notaConvertida)
+
+            //Verificar se a nota atual é maior que "maior"
+            if (notaConvertida > maior) {
+              maior = notaConvertida
+            }
+
+            //Verificar se a nota atual é menor que "menor"
+            if (notaConvertida < menor) {
+              menor = notaConvertida
+            }
+
+            //Soma o meu subtotal de notas com a nova nota
+            somaNotas = somaNotas + notaConvertida
+
+            media = somaNotas / notas.length
+          }
+        }
+        document.getElementById("inputNota").value = ""
+        imprimirResultados()
+      }
+    }
+
+    function imprimirResultados() {
+      document.getElementById("notas").innerText = "Notas: " + notas.join(" | ")
+      document.getElementById("maior").innerText = "Maior Nota: " + maior
+      document.getElementById("menor").innerText = "Menor Nota: " + menor
+      document.getElementById("media").innerText = "Média: " + media
+    }
+  </script>
+</html>
