@@ -4,24 +4,102 @@
     <meta charset="UTF-8" />
 
     <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      label {
+        display: inline-block;
+        width: 80%;
+      }
+
       span {
-        display: block;
+        display: inline-block;
+        width: 18%;
+        text-align: right;
+      }
+
+      .titulo {
+        text-align: center;
+      }
+
+      .entrada {
+        text-align: center;
+      }
+
+      .entrada button {
+        background-color: blueviolet;
+        color: white;
+        padding: 5px 8px;
+        border: 3px solid rgb(212, 210, 210);
+        border-radius: 4px;
+        font-weight: 600;
+        margin: 0px 5px;
+      }
+
+      .entrada input {
+        padding: 5px 8px;
+        border: 3px solid rgb(212, 210, 210);
+        border-radius: 4px;
+      }
+
+      .entrada input::placeholder {
+        font-weight: 600;
+        color: rgb(151, 150, 150);
+      }
+
+      .div-saida {
+        padding: 15px;
+        border: 3px solid rgb(212, 210, 210);
+        border-radius: 4px;
+        width: 50%;
+        margin: 20px auto;
+        font-weight: 600;
+      }
+
+      .separador {
+        margin: 20px 0px;
       }
     </style>
   </head>
 
   <body>
-    <h1>Situação do Aluno</h1>
+    <div class="card">
+      <h1 class="titulo">Situação do Aluno</h1>
 
-    <input type="number" placeholder="Digite a nota..." id="inputNota" />
-    <button onclick="adicionarNota()">Adicionar</button>
+      <div class="entrada">
+        <input type="number" placeholder="Digite a nota..." id="inputNota" />
+        <button onclick="adicionarNota()">Adicionar</button>
+      </div>
 
-    <div>
-      <span id="notas"></span>
-      <span id="maior"></span>
-      <span id="menor"></span>
-      <span id="media"></span>
-      <span id="situacao"></span>
+      <div class="div-saida">
+        <div>
+          <label for="notas">Notas:</label>
+          <span id="notas"></span>
+        </div>
+
+        <div class="separador">
+          <div>
+            <label for="mario">Maior:</label>
+            <span id="maior"></span>
+          </div>
+
+          <div>
+            <label for="menor">Menor:</label>
+            <span id="menor"></span>
+          </div>
+
+          <div>
+            <label for="media">Média:</label>
+            <span id="media"></span>
+          </div>
+        </div>
+
+        <div>
+          <label for="situacao">Situação:</label>
+          <span id="situacao"></span>
+        </div>
+      </div>
     </div>
   </body>
 
@@ -74,15 +152,28 @@
           }
         }
         document.getElementById("inputNota").value = ""
-        imprimirResultados()
+        situacaoEImpressao()
       }
     }
 
-    function imprimirResultados() {
-      document.getElementById("notas").innerText = "Notas: " + notas.join(" | ")
-      document.getElementById("maior").innerText = "Maior Nota: " + maior
-      document.getElementById("menor").innerText = "Menor Nota: " + menor
-      document.getElementById("media").innerText = "Média: " + media
+    function situacaoEImpressao() {
+      let spanSituacao = document.getElementById("situacao")
+
+      if (media < 4) {
+        spanSituacao.innerText = "Reprovado!"
+        spanSituacao.style = "color:red"
+      } else if (media < 7) {
+        spanSituacao.innerText = "Recuperação!"
+        spanSituacao.style = "color:yellow"
+      } else {
+        spanSituacao.innerText = "Aprovado!"
+        spanSituacao.style = "color:green"
+      }
+
+      document.getElementById("notas").innerText = notas.join(" | ")
+      document.getElementById("maior").innerText = maior
+      document.getElementById("menor").innerText = menor
+      document.getElementById("media").innerText = media
     }
   </script>
 </html>
