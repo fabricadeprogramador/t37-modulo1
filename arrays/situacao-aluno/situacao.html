@@ -19,6 +19,11 @@
         text-align: right;
       }
 
+      .card {
+        width: 60%;
+        margin: auto;
+      }
+
       .titulo {
         text-align: center;
       }
@@ -149,12 +154,6 @@
             somaNotas = somaNotas + notaConvertida
 
             media = somaNotas / notas.length
-
-
-            for (let index = 0; index < array.length; index++) {
-                const element = array[index];
-                
-            }
           }
         }
         document.getElementById("inputNota").value = ""
@@ -179,7 +178,7 @@
       document.getElementById("notas").innerText = notas.join(" | ")
       document.getElementById("maior").innerText = maior
       document.getElementById("menor").innerText = menor
-      document.getElementById("media").innerText = media
+      document.getElementById("media").innerText = media.toFixed(2)
     }
   </script>
 </html>
