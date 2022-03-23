@@ -1,0 +1,201 @@
+<html>
+  <head>
+    <title>Situação do aluno</title>
+    <meta charset="UTF-8" />
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      label {
+        display: inline-block;
+        width: 80%;
+      }
+
+      span {
+        display: inline-block;
+        width: 18%;
+        text-align: right;
+      }
+
+      .card {
+        width: 60%;
+        margin: auto;
+      }
+
+      .titulo {
+        text-align: center;
+      }
+
+      .entrada {
+        text-align: center;
+      }
+
+      .entrada button {
+        background-color: blueviolet;
+        color: white;
+        padding: 5px 8px;
+        border: 3px solid rgb(212, 210, 210);
+        border-radius: 4px;
+        font-weight: 600;
+        margin: 0px 5px;
+      }
+
+      .entrada input {
+        padding: 5px 8px;
+        border: 3px solid rgb(212, 210, 210);
+        border-radius: 4px;
+      }
+
+      .entrada input::placeholder {
+        font-weight: 600;
+        color: rgb(151, 150, 150);
+      }
+
+      #entrada2 {
+        display: none;
+      }
+
+      .div-saida {
+        padding: 15px;
+        border: 3px solid rgb(212, 210, 210);
+        border-radius: 4px;
+        width: 50%;
+        margin: 20px auto;
+        font-weight: 600;
+      }
+
+      .separador {
+        margin: 20px 0px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h1 class="titulo">Situação do Aluno</h1>
+
+      <div class="entrada" id="entrada1">
+        <input type="number" placeholder="Digite a nota..." id="inputNota" />
+        <button onclick="adicionarNota()">Adicionar</button>
+        <div>
+          <button>Finalizar</button>
+        </div>
+      </div>
+
+      <div class="entrada" id="entrada2">
+        <input type="number" placeholder="Digite a nota..." id="inputNota" />
+        <button onclick="adicionarNota()">Substituir</button>
+        <div>
+          <button>Retornar</button>
+        </div>
+      </div>
+
+      <div class="div-saida">
+        <div>
+          <label for="notas">Notas:</label>
+          <span id="notas"></span>
+        </div>
+
+        <div id="saida-final">
+          <div class="separador">
+            <div>
+              <label for="mario">Maior:</label>
+              <span id="maior"></span>
+            </div>
+
+            <div>
+              <label for="menor">Menor:</label>
+              <span id="menor"></span>
+            </div>
+
+            <div>
+              <label for="media">Média:</label>
+              <span id="media"></span>
+            </div>
+          </div>
+
+          <div>
+            <label for="situacao">Situação:</label>
+            <span id="situacao"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    let notas = []
+    let maior = 0
+    let menor = 0
+    let somaNotas = 0
+    let media = 0
+
+    function adicionarNota() {
+      let novaNota = document.getElementById("inputNota").value
+
+      if (novaNota == "") {
+        alert("Preencha a nota!")
+      } else {
+        let notaConvertida = parseFloat(novaNota)
+
+        if (notaConvertida > 10 || notaConvertida < 0) {
+          //Entra quando o valor digitado pelo usuário é maior que dez ou menor que zero
+          alert("Nota deve estar entre 0 e 10 !")
+        } else {
+          //Entra quando o valor digitado pelo usuário está entre zero e dez
+          if (notas.length == 0) {
+            //Entra quando é a primeira nota a ser inserida
+            notas.push(notaConvertida)
+
+            maior = notas[0]
+            menor = notas[0]
+            somaNotas = notas[0]
+            media = notas[0]
+          } else {
+            //Nâo é mais a primeira inserção de nota
+            notas.push(notaConvertida)
+
+            //Verificar se a nota atual é maior que "maior"
+            if (notaConvertida > maior) {
+              maior = notaConvertida
+            }
+
+            //Verificar se a nota atual é menor que "menor"
+            if (notaConvertida < menor) {
+              menor = notaConvertida
+            }
+
+            //Soma o meu subtotal de notas com a nova nota
+            somaNotas = somaNotas + notaConvertida
+
+            media = somaNotas / notas.length
+          }
+        }
+        document.getElementById("inputNota").value = ""
+        situacaoEImpressao()
+      }
+    }
+
+    function situacaoEImpressao() {
+      let spanSituacao = document.getElementById("situacao")
+
+      if (media < 4) {
+        spanSituacao.innerText = "Reprovado!"
+        spanSituacao.style = "color:red"
+      } else if (media < 7) {
+        spanSituacao.innerText = "Recuperação!"
+        spanSituacao.style = "color:yellow"
+      } else {
+        spanSituacao.innerText = "Aprovado!"
+        spanSituacao.style = "color:green"
+      }
+
+      document.getElementById("notas").innerText = notas.join(" | ")
+      document.getElementById("maior").innerText = maior
+      document.getElementById("menor").innerText = menor
+      document.getElementById("media").innerText = media.toFixed(2)
+    }
+  </script>
+</html>
