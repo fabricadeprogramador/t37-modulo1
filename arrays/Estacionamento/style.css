@@ -1,0 +1,91 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #d1e8fd;
+}
+
+input {
+    width: 80%;
+    border: 3px solid #95c8fa;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px;
+}
+
+img {
+    width: 20px;
+    cursor: pointer;
+}
+
+.entrada {
+    width: 30%;
+    margin-left: 20px;
+}
+
+.entrada label {
+    display: block;
+}
+
+.card {
+    display: flex;
+    width: 86%;
+    margin: auto;
+  
+}
+ button {
+    padding: 10px 40px; 
+}
+
+.botao1 {
+    margin: 19px;
+}
+
+#botaoAdd {
+    background-color: #88d08a;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#botaoAdd:hover {
+    cursor: pointer;
+    background-color: #54a057;
+}
+
+#botaoResultado {
+    background-color: #7ebfff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+#botaoResultado:hover {
+    cursor: pointer;
+    background-color: #427db8;
+}
+
+.tabela {
+    display: inline-block;
+    margin: auto;
+    width: 40%;
+}
+
+.resultado {
+    border: 2px solid;
+    display: inline-block;
+    height: 100px;
+    width: 40%;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.linha-resultado {
+    margin: 10px;
+}
