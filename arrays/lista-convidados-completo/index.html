@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Cadastro de Convidados</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="estilo.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body onload="buscarConvidados()">
+    <div class="container">
+      <h1>Cadastro de Convidados</h1>
+      <label>Nome</label>
+      <input id="nomeDigitado" type="text" placeholder="Nome do Convidado" />
+
+      <label>Idade</label>
+      <input
+        id="idadeDigitado"
+        type="number"
+        placeholder="Idade do Convidado"
+      />
+
+      <div class="sexolabel">
+        <label>Sexo:</label>
+
+        <input value="Masculino" type="radio" name="sexo" id="masc" />
+        <label>Masculino</label>
+
+        <input value="Feminino" type="radio" name="sexo" id="fem" />
+        <label>Feminino</label>
+      </div>
+
+      <div class="botoes">
+        <button onclick="salvar()">Salvar</button>
+        <button id="btnCancelar" onclick="limpar()">Cancelar</button>
+      </div>
+    </div>
+    <div class="divTabela">
+      <h1>Convidados Cadastrados</h1>
+      <table class="tabela1">
+        <thead>
+          <th id="nomeRotulo">Nome</th>
+          <th id="idadeRotulo">Idade</th>
+          <th id="sexoRotulo">Sexo</th>
+          <th id="vazioRotulo"></th>
+        </thead>
+        <tbody id="lista"></tbody>
+      </table>
+      <table class="tabela2">
+        <thead>
+          <th>Classificaçao</th>
+          <th>Qtd</th>
+        </thead>
+        <tbody id="lista2">
+          <tr>
+            <td>Crianças</td>
+            <td id="criancas">0</td>
+          </tr>
+          <tr>
+            <td>Adolescentes</td>
+            <td id="adolescentes">0</td>
+          </tr>
+          <tr>
+            <td>Adultos</td>
+            <td id="adultos">0</td>
+          </tr>
+          <tr>
+            <td>Idosos</td>
+            <td id="idosos">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #eff7ff;
+}
+
+h1 {
+    font-weight: 600;
+    text-align: center;
+}
+
+.container {
+    width: 55%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: #d1e8fd;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: left;
+}
+
+.container input[type=text], input[type=number] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 3px solid #77b8f8;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.container label {
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.sexolabel {
+    display: inline-block;
+    text-align: left;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 70px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #79c889;
+    color: white;
+    border: none;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #64a872;
+    transition: 0.3s;
+}
+
+#btnCancelar {
+    background-color: rgb(243, 224, 57);
+}
+
+#btnCancelar:hover {
+    cursor: pointer;
+    background-color: #daca43;
+    transition: 0.3s;
+}
+
+.botoes {
+    text-align: center;
+}
+
+.divTabela {
+    display: flex;
+    flex-wrap: wrap;
+    width: 55%;
+    margin: auto;
+    background-color: #d1e8fd;
+    border-radius: 5px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.divTabela h1 {
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 50px;
+    width: 40%;
+}
+
+.tabela1 {
+    width: 40%;
+    height: 20%;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+
+.tabela2 {
+    width: 20%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+thead {
+    width: 80%;
+    color: black;
+    border-top-left-radius: 10px;
+}
+
+
+th {
+    border: 1px solid black;
+    background-color: white;
+}
+
+
+td {
+    border: 1px solid black;
+    background-color: white; 
+}
+
+#nomeRotulo {
+    padding: 10px 50px;
+}
+
+#sexoRotulo {
+    padding: 10px 35px;
+}
+
+#idadeRotulo {
+    padding: 10px 15px;
+}
+
+#vazioRotulo {
+    padding: 10px 50px;
+}
+
+#lista td {
+    text-align: center;
+}
+
+#lista {
+    height: 20px;
+}
+
+#tabela2 th {
+    padding: 10px;
+}
+
+#tabela2 td {
+    text-align: center;
+}
+
+#lista2 td {
+    padding: 10px 15px;
+}
+
+img {
+    width: 20px;
+    
+}
+

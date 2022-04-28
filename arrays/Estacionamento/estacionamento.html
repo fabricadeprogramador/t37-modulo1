@@ -1,69 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
     <title>Estacionamento</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Estacionamento</h1>
 
     <div class="card">
+      <div class="entrada">
+        <label>Marca</label>
+        <input id="marca" type="text" placeholder="Insire a marca" />
+      </div>
 
-        <div class="entrada">
-            <label>Marca</label>
-            <input id="marca" type="text" placeholder="Insire a marca">
-        </div>
+      <div class="entrada">
+        <label>Modelo</label>
+        <input id="modelo" type="text" placeholder="Insire o modelo" />
+      </div>
 
-        <div class="entrada">
-            <label>Modelo</label>
-            <input id="modelo" type="text" placeholder="Insire o modelo">
-        </div>
+      <div class="entrada">
+        <label>Ano</label>
+        <input id="ano" type="number" placeholder="Insire o ano" />
+      </div>
 
-        <div class="entrada">
-            <label>Ano</label>
-            <input id="ano" type="number" placeholder="Insire o ano">
-        </div>
-
-        <div  class="botao1">
+      <div class="botao1">
         <button onclick="adicionar()" id="botaoAdd">Adicionar</button>
-        </div>
+      </div>
     </div>
 
-        <div class="botao">
-            <button onclick="classificar()" id="botaoResultado">Resultado</button>
-        </div>
+    <div class="botao">
+      <button onclick="classificar()" id="botaoResultado">Resultado</button>
+    </div>
 
-        <div class="tabela">
-            <table>
-            <tbody id="tabela"></tbody>    
-            </table>
+    <div class="tabela">
+      <table>
+        <tbody id="tabela"></tbody>
+      </table>
+    </div>
+    <div class="resultado">
+      <div class="linha-resultado">
+        <label>Mais Novo:</label>
+        <span id="maisNovo"></span>
+      </div>
 
-        </div>
-        <div class="resultado">
+      <div class="linha-resultado">
+        <label>Mais Velho:</label>
+        <span id="maisVelho"></span>
+      </div>
 
-            <div class="linha-resultado">
-                <label>Mais Novo:</label> 
-                <span id="maisNovo"></span>
-            </div>
-
-            <div class="linha-resultado">
-                <label>Mais Velho:</label> 
-                <span id="maisVelho"></span>
-            </div>
-
-            <div class="linha-resultado">
-                <label>Média:</label> 
-                <span id="media"></span>
-            </div>
-            
-        </div>
-
-</body>
-
+      <div class="linha-resultado">
+        <label>Média:</label>
+        <span id="media"></span>
+      </div>
+    </div>
+  </body>
 </html>
