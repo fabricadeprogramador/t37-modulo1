@@ -1,6 +1,5 @@
 let convidados = []
 let posicaoEdicao = null
-let backupIdade = -1
 let adultos = 0
 let criancas = 0
 let adolescentes = 0
@@ -11,7 +10,30 @@ async function buscarConvidados() {
   x.json().then((convidadosResposta) => {
     convidados = convidadosResposta
     listarConvidado()
+    classificar()
   })
+}
+
+function validar(convidado) {
+  let mensagemValidacao = ""
+
+  if (convidado.nome == "") {
+    mensagemValidacao += "Campo nome é obrigatório!\n"
+  }
+
+  if (convidado.idade == "") {
+    mensagemValidacao += "Campo idade é obrigatório!\n"
+  }
+
+  if (convidado.sexo == null) {
+    mensagemValidacao += "Campo sexo é obrigatório!\n"
+  }
+
+  if (mensagemValidacao == "") return true
+  else {
+    alert(mensagemValidacao)
+    return false
+  }
 }
 
 function salvar() {
@@ -20,32 +42,15 @@ function salvar() {
   convidado.idade = document.getElementById("idadeDigitado").value
   convidado.sexo = document.querySelector("[type=radio]:checked")
 
-  if (convidado.nome == "") {
-    alert("Preencha o nome")
-    return
-  }
-
-  if (convidado.idade == "") {
-    alert("Preencha a idade")
-    return
-  }
-
-  if (convidado.sexo == null) {
-    alert("Preencha o sexo")
-    return
-  } else {
+  if (validar(convidado)) {
     convidado.sexo = document.querySelector("[type=radio]:checked").value
-  }
 
-  if (posicaoEdicao == null) {
-    adicionar(convidado)
-  } else {
-    finalizarEdicao(convidado)
+    if (posicaoEdicao == null) {
+      adicionar(convidado)
+    } else {
+      finalizarEdicao(convidado)
+    }
   }
-
-  listarConvidado()
-  verificarClassificacao(convidado.idade, false)
-  limpar()
 }
 
 function limpar() {
@@ -54,21 +59,45 @@ function limpar() {
   document.getElementById("masc").checked = false
   document.getElementById("fem").checked = false
 
-  backupIdade = 0
   posicaoEdicao = null
 }
 
 function finalizarEdicao(convidado) {
-  convidados[posicaoEdicao] = convidado
+  convidados[posicaoEdicao]
+
+  fetch(`http://localhost:3000/convidados/${convidados[posicaoEdicao]._id}`, {
+    method: "PUT",
+    body: JSON.stringify(convidado),
+    headers: { "Content-type": "application/json; charset=UTF-8" }
+  })
+    .then((resposta) => {
+      return resposta.json()
+    })
+    .then((convidadoEdicao) => {
+      convidados[posicaoEdicao] = convidadoEdicao
+      alert("Convidado editado com Sucesso!")
+      listarConvidado()
+      classificar()
+      limpar()
+    })
 }
 
 function adicionar(convidado) {
-  convidado.sexo = document.querySelector("[type=radio]:checked").value
-  convidados.push(convidado)
-  alert("Convidado Cadastrado")
-  listarConvidado()
-
-  limpar()
+  fetch("http://localhost:3000/convidados", {
+    method: "POST",
+    body: JSON.stringify(convidado),
+    headers: { "Content-type": "application/json; charset=UTF-8" }
+  })
+    .then((resposta) => {
+      return resposta.json()
+    })
+    .then((convidadoNovo) => {
+      convidados.push(convidadoNovo)
+      alert("Convidado Cadastrado com Sucesso!")
+      listarConvidado()
+      classificar()
+      limpar()
+    })
 }
 
 function listarConvidado() {
@@ -92,9 +121,19 @@ function listarConvidado() {
 
 function excluir(posicao) {
   if (confirm("Tem certeza que deseja excluir este convidado?")) {
-    verificarClassificacao(convidados[posicao].idade, true)
-    convidados.splice(posicao, 1)
-    listarConvidado()
+    fetch(`http://localhost:3000/convidados/${convidados[posicao]._id}`, {
+      method: "DELETE"
+    })
+      .then((resposta) => {
+        return resposta.json()
+      })
+      .then((convidadoDeletado) => {
+        alert("Convidado removido com sucesso!")
+        convidados.splice(posicao, 1)
+        classificar()
+        listarConvidado()
+        limpar()
+      })
   }
 }
 
@@ -107,30 +146,52 @@ function prepararEdicao(posicao) {
   } else {
     document.getElementById("fem").checked = true
   }
-  backupIdade = convidados[posicao].idade
 }
 
-function verificarClassificacao(idade, eRemocao) {
-  if (posicaoEdicao == null) {
-    eRemocao ? classificar(idade, false) : classificar(idade, true)
-  } else {
-    classificar(backupIdade, false)
-    classificar(idade, true)
-  }
-}
+function classificar() {
+  criancas = 0
+  adolescentes = 0
+  adultos = 0
+  idosos = 0
 
-function classificar(idade, adicao) {
-  if (idade < 14) {
-    adicao ? criancas++ : criancas--
-    document.querySelector("#criancas").innerText = criancas
-  } else if (idade >= 14 && idade < 18) {
-    adicao ? adolescentes++ : adolescentes--
-    document.querySelector("#adolescentes").innerText = adolescentes
-  } else if (idade >= 18 && idade < 60) {
-    adicao ? adultos++ : adultos--
-    document.querySelector("#adultos").innerText = adultos
-  } else {
-    adicao ? idosos++ : idosos--
-    document.querySelector("#idosos").innerText = idosos
+  for (let i = 0; i < convidados.length; i++) {
+    if (convidados[i].idade < 14) {
+      criancas++
+    } else if (convidados[i].idade >= 14 && convidados[i].idade < 18) {
+      adolescentes++
+    } else if (convidados[i].idade >= 18 && convidados[i].idade < 60) {
+      adultos++
+    } else {
+      idosos++
+    }
   }
+
+  document.getElementById("criancas").innerText = criancas
+  document.getElementById("adolescentes").innerText = adolescentes
+  document.getElementById("adultos").innerText = adultos
+  document.getElementById("idosos").innerText = idosos
 }
+// function verificarClassificacao(idade, eRemocao) {
+//   if (posicaoEdicao == null) {
+//     eRemocao ? classificar(idade, false) : classificar(idade, true)
+//   } else {
+//     classificar(backupIdade, false)
+//     classificar(idade, true)
+//   }
+// }
+
+// function classificar(idade, adicao) {
+//   if (idade < 14) {
+//     adicao ? criancas++ : criancas--
+//     document.querySelector("#criancas").innerText = criancas
+//   } else if (idade >= 14 && idade < 18) {
+//     adicao ? adolescentes++ : adolescentes--
+//     document.querySelector("#adolescentes").innerText = adolescentes
+//   } else if (idade >= 18 && idade < 60) {
+//     adicao ? adultos++ : adultos--
+//     document.querySelector("#adultos").innerText = adultos
+//   } else {
+//     adicao ? idosos++ : idosos--
+//     document.querySelector("#idosos").innerText = idosos
+//   }
+// }
